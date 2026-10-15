@@ -2,7 +2,7 @@
 
 /** One page of items. Pages start at 1, so page 1 is the first `size` items. */
 export function paginate(items, page, size) {
-  const start = page * size;
+  const start = (page - 1) * size;
   return items.slice(start, start + size);
 }
 
@@ -12,8 +12,11 @@ export function averageTotal(totals) {
   return sum / totals.length;
 }
 
-/** A one-line description of the order with this id. */
+/** A one-line description of the order with this id, or a not-found message. */
 export function describeOrder(orders, id) {
   const order = orders.find((o) => o.id === id);
+  if (!order) {
+    return `Order #${id} not found.`;
+  }
   return `Order #${order.id} for ${order.customer}: ${order.total} cents`;
 }

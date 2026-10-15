@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { averageTotal, describeOrder, paginate } from '../src/orders.js';
 
 test('paginate returns a slice of the items', () => {
-  assert.deepEqual(paginate(['a', 'b', 'c', 'd', 'e'], 0, 2), ['a', 'b']);
+  assert.deepEqual(paginate(['a', 'b', 'c', 'd', 'e'], 1, 2), ['a', 'b']);
 });
 
 test('averageTotal averages the totals', () => {
@@ -12,4 +12,8 @@ test('averageTotal averages the totals', () => {
 
 test('describeOrder describes an order', () => {
   assert.equal(describeOrder([{ id: 7, customer: 'Maya', total: 1250 }], 7), 'Order #7 for Maya: 1250 cents');
+});
+
+test('describeOrder handles an id that does not exist', () => {
+  assert.equal(describeOrder([{ id: 7, customer: 'Maya', total: 1250 }], 9), 'Order #9 not found.');
 });
