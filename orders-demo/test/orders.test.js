@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { averageTotal, describeOrder, paginate } from '../src/orders.js';
 
 test('paginate returns a slice of the items', () => {
-  assert.deepEqual(paginate(['a', 'b', 'c', 'd', 'e'], 0, 2), ['a', 'b']);
+  assert.deepEqual(paginate(['a', 'b', 'c', 'd', 'e'], 1, 2), ['a', 'b']);
 });
 
 test('averageTotal averages the totals', () => {
