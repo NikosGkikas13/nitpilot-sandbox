@@ -22,8 +22,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
+      # The free Gemini tier allows only a few requests a day on the default model: use the lighter one.
+      - run: mkdir -p "$RUNNER_TEMP/nitpilot" && echo '{ "model": "gemini-3.5-flash-lite" }' > "$RUNNER_TEMP/nitpilot/config.json"
       - uses: NikosGkikas13/nitpilot/.github/actions/review@v0.8.0
         with:
           agent: gemini-cli
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NITPILOT_CONFIG_DIR: ${{ runner.temp }}/nitpilot
